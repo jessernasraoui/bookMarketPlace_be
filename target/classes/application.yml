@@ -1,0 +1,27 @@
+server:
+  port: 8081
+logging:
+  level:
+    org.springframework.security: DEBUG
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+application:
+    security:
+      jwt:
+        secret-key: ${secret_key}
+        expiration: ${expiration}
