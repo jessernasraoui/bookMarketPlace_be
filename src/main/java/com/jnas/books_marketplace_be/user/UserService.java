@@ -9,5 +9,5 @@ public interface UserService extends UserDetailsService {
     User createUser(UserRequestDto user);
     void updateUser(Long userId, UserRequestDto user);
     List<UserResponseDto> findAllUsers(int page, int size);
-    UserResponseDto findById(Long userId);
+    User findById(Long userId);
 }

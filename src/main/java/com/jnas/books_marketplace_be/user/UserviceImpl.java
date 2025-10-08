@@ -45,15 +45,14 @@ public class UserviceImpl implements UserService {
     public void updateUser(Long userId, UserRequestDto userRequest) {
 
         User user = userRepository.findById(userId)
-                 .orElseThrow(() -> new RuntimeException("user not found"));
+                 .orElseThrow(() -> new UserNotFoundException(userId));
         user.setUserName(userRequest.getUserName());
     }
 
     @Override
-    public UserResponseDto findById(Long userId) {
+    public User findById(Long userId) {
        return userRepository.findById(userId)
-               .map(userMapper::mapToUserResponseDto)
-               .orElseThrow(()-> new RuntimeException("user not found"));
+               .orElseThrow(()-> new UserNotFoundException(userId));
     }
 
     @Override

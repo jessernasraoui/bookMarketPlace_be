@@ -1,8 +1,16 @@
 package com.jnas.books_marketplace_be.book;
 
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-@Service
 public interface BookService {
-    Book findBookById(long bookId);
+    Book findBookById(Long id);
+
+    BookResponseDTO addBook(BookRequestDTO book);
+
+    BookResponseDTO updateBook(Long id, BookRequestDTO book);
+
+    void deleteBook(Long id);
+
+    Page<BookResponseDTO> getBooks(String author, String title, CategoryName category, Pageable pageable);
 }

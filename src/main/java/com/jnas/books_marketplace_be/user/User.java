@@ -38,6 +38,8 @@ public class User extends AbstractEntity implements UserDetails {
    private List<Book> books ;
    @Column(nullable = false)
    private String password;
+  // @Column(nullable = false)
+  // private Boolean UserIsArchived=false; // update user logic to not delete user from db
 
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {

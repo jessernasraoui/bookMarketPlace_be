@@ -34,12 +34,13 @@ public class UserController {
     }
 
     @GetMapping("/{user-id}")
-    public ResponseEntity<UserResponseDto> findUserById(@PathVariable("user-id") long userId) {
+    public ResponseEntity<User> findUserById(@PathVariable("user-id") long userId) {
 
-        UserResponseDto user = userService.findById(userId);
+        User user = userService.findById(userId);
         return ResponseEntity.ok(user);
 
     }
+
     @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         User user = userService.createUser(userRequestDto);

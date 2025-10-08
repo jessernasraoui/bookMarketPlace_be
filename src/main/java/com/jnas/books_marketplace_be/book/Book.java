@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -22,13 +23,17 @@ import java.util.List;
 public class Book extends AbstractEntity {
     private String title;
     private String author;
-    private double price;
+    private BigDecimal price;
     private String description;
+    @Enumerated(EnumType.STRING)
     private CategoryName category;
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
     private User seller;
     @OneToMany(mappedBy = "book")
     private List<OrderDetails> orderDetails;
-
+    @Column(nullable = false)
+    private boolean deleted = false;
+   // @Column(nullable = false)
+    //private int quantity ;
 }
