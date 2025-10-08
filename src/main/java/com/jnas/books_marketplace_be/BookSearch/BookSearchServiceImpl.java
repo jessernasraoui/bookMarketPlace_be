@@ -1,7 +1,6 @@
 package com.jnas.books_marketplace_be.BookSearch;
 
 import com.jnas.books_marketplace_be.book.Book;
-import com.jnas.books_marketplace_be.book.BookRepository;
 import com.jnas.books_marketplace_be.book.CategoryName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

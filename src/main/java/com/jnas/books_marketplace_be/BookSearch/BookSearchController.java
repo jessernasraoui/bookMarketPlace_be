@@ -22,7 +22,7 @@ public class BookSearchController {
                                         @RequestParam(required = false) String title,
                                         @RequestParam(required = false) String author,
                                         @RequestParam(required = false) CategoryName category,
-                                      @PageableDefault(size = 10,sort = "title") Pageable pageable) {
+                                      @PageableDefault(sort = "title") Pageable pageable) {
         return bookSearchService.searchBooks(query, author, title, category, pageable);
     }
 }

@@ -1,7 +1,7 @@
 package com.jnas.books_marketplace_be.book;
 
 import com.jnas.books_marketplace_be.common.AbstractEntity;
-import com.jnas.books_marketplace_be.order_details.OrderDetails;
+import com.jnas.books_marketplace_be.order_items.OrderItem;
 import com.jnas.books_marketplace_be.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,9 +31,9 @@ public class Book extends AbstractEntity {
     @JoinColumn(name = "user_id",nullable = false)
     private User seller;
     @OneToMany(mappedBy = "book")
-    private List<OrderDetails> orderDetails;
+    private List<OrderItem> orderItems;
     @Column(nullable = false)
     private boolean deleted = false;
-   // @Column(nullable = false)
-    //private int quantity ;
+   @Column(nullable = false)
+    private int quantity ;
 }
