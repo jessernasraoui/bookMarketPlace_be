@@ -98,4 +98,9 @@ public class CartServiceImpl implements CartService {
     public void clearCart(Long userId) {
         redisTemplate.delete(getCartKey(userId));
     }
+
+    @Override
+    public List<CartItemDTO> getCartItemsByUser(Long userId) {
+        return List.of();
+    }
 }

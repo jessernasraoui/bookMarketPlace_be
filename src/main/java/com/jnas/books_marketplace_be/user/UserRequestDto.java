@@ -25,4 +25,5 @@ public class UserRequestDto {
     @NotBlank(message = "Password must not be empty")
     @Size(min = 8, max = 16, message = "Password must be between 8 and 16 characters")
     private String password;
+
 }

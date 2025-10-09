@@ -2,6 +2,7 @@ package com.jnas.books_marketplace_be.cart;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,12 +12,14 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping("/{userId}")
+    @PreAuthorize("#userId == principal.id or hasRole('ROLE_ADMIN')")
     public ResponseEntity<CartDTO> getCart(@PathVariable Long userId) {
         CartDTO cart = cartService.getCart(userId);
         return (cart == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(cart);
     }
 
     @PostMapping("/{userId}/items/{bookId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<CartDTO> addItemToCart(@PathVariable Long userId,
                                                 @PathVariable Long bookId,
                                                 @RequestParam  int quantity) {
@@ -26,6 +29,7 @@ public class CartController {
     }
 
     @PutMapping("/{userId}/items/{bookId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<CartDTO> updateCartItemQuantity(@PathVariable Long userId,
                                                           @PathVariable Long bookId,
                                                           @RequestParam int newQuantity) {
@@ -35,6 +39,7 @@ public class CartController {
 
     // Remove an item from the cart
     @DeleteMapping("/{userId}/items/{bookId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<CartDTO> removeItemFromCart(@PathVariable Long userId,
                                                       @PathVariable Long bookId){
         cartService.removeItemFromCart(userId, bookId);
@@ -43,6 +48,7 @@ public class CartController {
 
     //  Clear the entire cart
     @DeleteMapping("/{userId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> clearCart(@PathVariable Long userId) {
         cartService.clearCart(userId);
         return ResponseEntity.noContent().build();

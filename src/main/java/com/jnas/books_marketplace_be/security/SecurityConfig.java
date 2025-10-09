@@ -26,21 +26,18 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )            .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers(
-//                                "/api/v1/auth/**",        // for all auth endpoints
-//                                "/api/v1/users",          // user registration
-//                                "/swagger-ui/**",
+                      .requestMatchers(
+                              "/api/v1/auth/**",        // login, register
+                              "/api/v1/users",
+                              "/swagger-ui/**",
+                                "/v3/api-docs/**"
 
-//                                "/v3/api-docs/**",
+                       ).permitAll()
 
-//                        ).permitAll()
-
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-
 
 }

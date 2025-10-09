@@ -16,4 +16,9 @@ public interface OrderService {
     // Get single order
     OrderResponseDTO getOrderById(Long orderId);
 
+    Page<OrderResponseDTO> getAllOrders(Pageable pageable);
+
+
+
+
 }
