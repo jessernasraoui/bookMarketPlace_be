@@ -3,12 +3,19 @@
 📋 Table of Contents
 
 🧩 Project Overview
+
 🏗️ Architecture Pattern
+
 📁 Project Structure
+
 ⚙️ Layer Responsibilities
+
 🔄 Dependency Flow
+
 🧭 Workflow Guidelines
+
 💻 Development Standards
+
 🚀 Getting Started
 
 
