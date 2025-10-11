@@ -21,5 +21,5 @@ public class OrderResponseDTO {
     private List<OrderItemsResponseDTO> items;
     private BigDecimal total;
     private OrderStatus status;
-    private LocalDateTime createdAt;
+    private String shippingAddress;
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderResponseDTO addOrder(OrderRequestDTO request) {
         // Get the user
-        User user = userRepository.findById(request.getUserId())
+        User user = userRepository.findByIdAndUserIsArchivedFalse(request.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(request.getUserId()));
 
         //  Get cart items
@@ -61,12 +62,13 @@ public class OrderServiceImpl implements OrderService {
 
         order.setOrderItems(orderItems);
 
-        // 5️⃣ Calculate total
+        //  Calculate total
         BigDecimal total = orderItems.stream()
                 .map(i -> i.getPrice().multiply(BigDecimal.valueOf(i.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         order.setTotalPrice(total);
 
+        order.setShippingAddress(request.getShippingAddress());
         // Save order and clear cart
         orderRepository.save(order);
         cartService.clearCart(request.getUserId());
