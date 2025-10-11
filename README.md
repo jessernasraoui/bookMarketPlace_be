@@ -1,4 +1,16 @@
 📚 Books Marketplace – Backend
+
+📋 Table of Contents
+Project Overview
+Architecture Pattern
+Project Structure
+Layer Responsibilities
+Dependency Flow
+Workflow Guidelines
+Development Standards
+Getting Started
+
+
 🧩 Project Overview
 
 Books Marketplace is a Spring Boot–based web platform that enables users to buy and sell books online.
