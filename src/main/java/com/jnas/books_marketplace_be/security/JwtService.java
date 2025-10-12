@@ -20,7 +20,9 @@ public class JwtService {
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
     @Value("${application.security.jwt.expiration}")
-    private long expiration;
+    private long accessTokenExpiration;
+    @Value("${application.security.jwt.refresh-token.expiration:604800000}") // Default 7 days
+    private long refreshTokenExpiration;
 
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
@@ -60,16 +62,19 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public String generateToken(UserDetails user) {
-        return generateToken(user, new HashMap<>());
+    public String generateAccessToken(UserDetails user) {
+        return generateAccessToken(user, new HashMap<>());
     }
 
-    public String generateToken(UserDetails user, Map<String, Object> claims) {
-        return buildToken(user, claims);
+    public String generateAccessToken(UserDetails user, Map<String, Object> claims) {
+        return buildToken(user, claims, accessTokenExpiration);
+    }
+    
+    public String generateRefreshToken(UserDetails user) {
+        return buildToken(user, new HashMap<>(), refreshTokenExpiration);
     }
 
-    private String buildToken(UserDetails user, Map<String, Object> claims) {
-
+    private String buildToken(UserDetails user, Map<String, Object> claims, long expiration) {
         return Jwts
                 .builder()
                 .claims(claims)
@@ -79,5 +84,5 @@ public class JwtService {
                 .signWith(getSignInKey())
                 .compact();
     }
-    }
+}
 
