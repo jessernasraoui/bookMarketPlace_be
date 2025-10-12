@@ -31,6 +31,7 @@ public class Order extends AbstractEntity {
     private User buyer;
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
-    private String shippingAddress;
+    @Embedded
+    private ShippingAddress shippingAddress;
 
 }

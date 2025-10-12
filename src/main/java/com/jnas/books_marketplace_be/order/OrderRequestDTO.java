@@ -10,6 +10,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class OrderRequestDTO implements Serializable {
     private Long userId;
-    private String shippingAddress;
+    private ShippingAddress shippingAddress;
 
 }
